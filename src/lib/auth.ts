@@ -63,7 +63,7 @@ const config = {
     },
     jwt: ({ token, user }) => {
       if (user) {
-        token.userId = user.id;
+        token.userId = user.id as string;
       }
 
       return token;
