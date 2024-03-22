@@ -11,7 +11,7 @@ export async function addPet(newPet: unknown) {
   const validatedPet = petFormSchema.safeParse(newPet);
   if (!validatedPet.success) {
     return {
-      message: "Invalid pet data",
+      message: "Dados inválidos.",
     };
   }
 
@@ -30,7 +30,8 @@ export async function addPet(newPet: unknown) {
     revalidatePath("/app", "layout");
   } catch (e) {
     return {
-      message: "Could not add pet. Please try again later.",
+      message:
+        "Não foi possível adicionar o pet. Por favor, tente novamente mais tarde",
     };
   }
 }
@@ -42,7 +43,7 @@ export async function editPet(petId: unknown, newPetData: unknown) {
   const validatedPet = petFormSchema.safeParse(newPetData);
   if (!validatedPet.success || !validatedPetId.success) {
     return {
-      message: "Invalid pet data",
+      message: "Dados inválidos",
     };
   }
 
@@ -50,13 +51,13 @@ export async function editPet(petId: unknown, newPetData: unknown) {
 
   if (!pet) {
     return {
-      message: "Pet not found",
+      message: "Pet não encontrado",
     };
   }
 
   if (pet.userId !== session.user.id) {
     return {
-      message: "You cannot edit this pet",
+      message: "Você não pode editar este pet",
     };
   }
 
@@ -69,7 +70,8 @@ export async function editPet(petId: unknown, newPetData: unknown) {
     });
   } catch (e) {
     return {
-      message: "Could not edit pet. Please try again later.",
+      message:
+        "Não foi possível editar o pet. Por favor, tente novamente mais tarde",
     };
   }
 
@@ -82,7 +84,7 @@ export async function checkoutPet(petId: unknown) {
   const validatedPetId = petIdSchema.safeParse(petId);
   if (!validatedPetId.success) {
     return {
-      message: "Invalid pet data",
+      message: "Dados inválidos",
     };
   }
 
@@ -90,13 +92,13 @@ export async function checkoutPet(petId: unknown) {
 
   if (!pet) {
     return {
-      message: "Pet not found",
+      message: "Pet não encontrado",
     };
   }
 
   if (pet.userId !== session.user.id) {
     return {
-      message: "You cannot checkout this pet",
+      message: "Você não pode excluir este pet",
     };
   }
 
@@ -110,7 +112,8 @@ export async function checkoutPet(petId: unknown) {
     revalidatePath("/app", "layout");
   } catch (e) {
     return {
-      message: "Could not edit pet. Please try again later.",
+      message:
+        "Não foi possível excluir o pet. Por favor, tente novamente mais tarde",
     };
   }
 }

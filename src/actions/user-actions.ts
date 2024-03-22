@@ -21,13 +21,13 @@ export async function logIn(prevState: unknown, formData: unknown) {
       switch (e.type) {
         case "CredentialsSignin": {
           return {
-            message: "Invalid credentials",
+            message: "Credenciais inválidas.",
           };
         }
 
         default: {
           return {
-            message: "Could not sign in",
+            message: "Não foi possível realizar o login.",
           };
         }
       }
@@ -40,7 +40,7 @@ export async function logIn(prevState: unknown, formData: unknown) {
 export async function signUp(prevState: unknown, formData: unknown) {
   if (!(formData instanceof FormData)) {
     return {
-      message: "Invalid form data",
+      message: "Dados inválidos.",
     };
   }
 
@@ -51,7 +51,7 @@ export async function signUp(prevState: unknown, formData: unknown) {
   if (!validatedFormData.success) {
     console.log(validatedFormData.error);
     return {
-      message: "Invalid form data",
+      message: "Dados inválidos.",
     };
   }
 
@@ -70,14 +70,14 @@ export async function signUp(prevState: unknown, formData: unknown) {
     if (err instanceof Prisma.PrismaClientKnownRequestError) {
       if (err.code === "P2002") {
         return {
-          message: "User already exists",
+          message: "Usuário já cadastrado.",
         };
       }
     }
 
     console.error(err);
     return {
-      message: "Could not create user",
+      message: "Não foi possível realizar o cadastro.",
     };
   }
 
